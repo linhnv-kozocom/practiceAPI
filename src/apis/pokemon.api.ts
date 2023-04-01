@@ -1,14 +1,17 @@
-import { namePokemon } from "../types/category.type"
-import { SuccesResponse } from "../types/utils.type"
-import http from "../util/http"
+import { NamePokemon, Pokemon } from '../types/category.type'
+import http from '../util/http'
+import { ProductListPokeconfig } from './../types/productListPoke.type'
 
-const URL = 'pokemon'
+export const URL = 'pokemon'
 
 const pokemonApi = {
-
-  getCategory() {
-    console.log(http)
-    return http.get<SuccesResponse<namePokemon[]>>(URL)
+  getCategory(params: ProductListPokeconfig) {
+    return http.get<NamePokemon>(URL, {
+      params
+    })
+  },
+  getCategoryDetail(name: string) {
+    return http.get<Pokemon>(`${URL}/${name}`)
   }
 }
 export default pokemonApi
